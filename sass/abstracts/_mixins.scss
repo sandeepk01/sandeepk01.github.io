@@ -1,0 +1,122 @@
+// MEDIA QUERY MANAGER
+/*
+0 - 600px:      Phone
+600 - 900px:    Tablet portrait
+900 - 1200px:   Tablet landscape
+[1200 - 1800] is where our normal styles apply
+1800px + :      Big desktop
+$breakpoint arguement choices:
+- phone
+- tab-port
+- tab-land
+- big-desktop
+
+Inside media queries 1em is always 16px i.e 1em = 16px at every screen size only inside media queries
+*/
+@use "sass:math";
+@use "sass:map";
+
+@mixin respond($breakpoint) {
+  @if $breakpoint == phone {
+    @media only screen and (max-width: 37.5em) {
+      @content;
+    } //600px
+  }
+  @if $breakpoint == tab-port {
+    @media only screen and (max-width: 56.25em) {
+      @content;
+    } //900px
+  }
+  @if $breakpoint == tab-land {
+    @media only screen and (max-width: 75em) {
+      @content;
+    } //1200px
+  }
+  @if $breakpoint == big-desktop {
+    @media only screen and (min-width: 112.5em) {
+      @content;
+    } //1800
+  }
+}
+
+@mixin secondaryFont {
+  font-family: 'Overpass', sans-serif;
+}
+
+@function to-rgb($value) {
+    @return red($value), green($value), blue($value);
+}
+
+@function text-contrast($n, $lighter: #fff, $darker: #000) {
+    $color-brightness: round((red($n) * 299) + (green($n) * 587) + math.div(blue($n) * 114, 1000));
+    $light-color: round((red(#ffffff) * 299) + (green(#ffffff) * 587) + math.div(blue(#ffffff) * 114, 1000));
+
+    @if abs($color-brightness) < math.div($light-color, 2) {
+        @return $lighter;
+    } @else {
+        @return $darker;
+    }
+}
+
+@function colour-difference($foreground, $background) {
+    $r: (max(red($foreground), red($background))) - (min(red($foreground), red($background)));
+    $g: (max(green($foreground), green($background))) - (min(green($foreground), green($background)));
+    $b: (max(blue($foreground), blue($background))) - (min(blue($foreground), blue($background)));
+    $sum-rgb: $r + $g + $b;
+
+    @if $sum-rgb < 500 {
+        @return 'false';
+    } @else {
+        @return 'true';
+    }
+}
+
+@function contrast-ratio($background, $foreground) {
+    $l1: luminance($background);
+    $l2: luminance(opaque($background, $foreground));
+    @return if($l1 > $l2, divide($l1 + 0.05, $l2 + 0.05), divide($l2 + 0.05, $l1 + 0.05));
+}
+
+// Return WCAG2.0 relative luminance
+// See https://www.w3.org/WAI/GL/wiki/Relative_luminance
+// See https://www.w3.org/TR/WCAG20-TECHS/G17.html#G17-tests
+@function luminance($color) {
+    $rgb: (
+        'r': red($color),
+        'g': green($color),
+        'b': blue($color),
+    );
+
+    @each $name, $value in $rgb {
+        $value: if(divide($value, 255) < 0.03928, divide(divide($value, 255), 12.92), nth($_luminance-list, $value + 1));
+        $rgb: map-merge(
+            $rgb,
+            (
+                $name: $value,
+            )
+        );
+    }
+
+    @return (map-get($rgb, 'r') * 0.2126) + (map-get($rgb, 'g') * 0.7152) + (map-get($rgb, 'b') * 0.0722);
+}
+
+// Return opaque color
+// opaque(#fff, rgba(0, 0, 0, .5)) => #808080
+@function opaque($background, $foreground) {
+    @return mix(rgba($foreground, 1), $background, opacity($foreground) * 100);
+}
+
+// Tint a color: mix a color with white
+@function tint-color($color, $weight) {
+    @return mix(white, $color, $weight);
+}
+
+// Shade a color: mix a color with black
+@function shade-color($color, $weight) {
+    @return mix(black, $color, $weight);
+}
+
+// Shade the color if the weight is positive, else tint it
+@function shift-color($color, $weight) {
+    @return if($weight > 0, shade-color($color, $weight), tint-color($color, -$weight));
+}

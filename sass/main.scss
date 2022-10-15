@@ -1,0 +1,42 @@
+@import 'abstracts/variables';
+@import 'abstracts/mixins';
+@import 'abstracts/utilities';
+
+
+@import 'base/base';
+
+@import 'components/header';
+@import 'components/footer';
+@import 'components/skills';
+@import 'components/mouse-scroll';
+
+@import 'pages/home';
+
+// Custom webkit scrollbar
+::-webkit-scrollbar {
+    height: 0.5rem;
+    width: 0.5rem;
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.25);
+}
+::-webkit-scrollbar-track-piece {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.5);
+}
+* {
+    // For IE
+    // -ms-scrollbar-base-color: #efefef;
+    // -ms-scrollbar-face-color: #666666;
+    // -ms-scrollbar-highlight-color: #666666;
+    // -ms-scrollbar-track-color: #efefef;
+    // -ms-scrollbar-arrow-color: #666666;
+    // -ms-scrollbar-shadow-color: #666666;
+    // Firefox
+    scrollbar-color: dark;
+    scrollbar-width: thin;
+    box-sizing: border-box;
+}
