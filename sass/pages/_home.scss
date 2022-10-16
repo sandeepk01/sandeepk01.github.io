@@ -28,6 +28,7 @@
     bottom: 3%;
     left: 50%;
     transform: translateX(-50%);
+    cursor: pointer;
 
     @include respond(phone) {
       display: none;
@@ -49,6 +50,9 @@
 
     &:hover {
       background: rgba(#fff,0.3);
+      > * {
+          transform: scale(1.2);
+      }
     }
 
     &--bd-none {
@@ -58,6 +62,9 @@
 
   &__social-icon {
     width: 100%;
+    &:hover {
+        transform: scale(1.2);
+    }
   }
 
   &__content {
@@ -122,81 +129,93 @@
 }
 
 .projects {
-  &__row {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    grid-gap: 5rem;
-    margin-bottom: 11rem;
-
-    @include respond(tab-port) {
-      grid-template-columns: 1fr;
-      grid-gap: 2rem;
-      margin-bottom: 8rem;
-    }
-
-    @include respond(tab-port) {
-      text-align: center;
-    }
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-
-    &-img-cont {
-      overflow: hidden;
-    }
-    &-img {
-      width: 100%;
-      display: block;
-      object-fit: cover;
-    }
-    &-content {
-      padding: 2rem 0;
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
-      align-items: flex-start;
-
-      @include respond(tab-port) {
-        align-items: center;
-      }
-
-      &-title {
-        font-weight: 700;
-        font-size: 2.8rem;
-        margin-bottom: 2rem;
-        @include respond(phone) {
-          font-size: 2.4rem;
+    &__content {
+        margin-bottom: 8rem;
+        &:last-child {
+            margin-bottom: 0;
         }
-      }
-      &-desc {
-        font-size: 1.8rem;
-        color: #444;
-        max-width: 60rem;
-        line-height: 1.7;
-        margin-bottom: 3rem;
-        @include respond(phone) {
-          font-size: 1.7rem;
-        }
-      }
     }
-  }
+    &__row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 3rem;
+        margin-bottom: 8rem;
+
+        @include respond(tab-port) {
+            grid-template-columns: 1fr;
+            grid-gap: 2rem;
+            margin-bottom: 8rem;
+        }
+
+        @include respond(tab-port) {
+            text-align: center;
+        }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+        &-content {
+            padding: 2rem;
+            display: flex;
+            //justify-content: center;
+            flex-direction: column;
+            align-items: flex-start;
+            background: #f5f5f5;
+
+            @include respond(tab-port) {
+                align-items: center;
+            }
+
+            &-title {
+                font-weight: 700;
+                font-size: 2.8rem;
+                margin-bottom: 1rem;
+                @include respond(phone) {
+                    font-size: 2.4rem;
+                }
+            }
+            &-subtitle {
+                font-weight: 600;
+                font-size: 1.8rem;
+                margin-bottom: 1rem;
+                @include respond(phone) {
+                    font-size: 1.4rem;
+                }
+            }
+            &-desc {
+                font-size: 1.8rem;
+                color: #444;
+                max-width: 60rem;
+                line-height: 1.7;
+                margin-bottom: 1.5rem;
+                @include respond(phone) {
+                    font-size: 1.7rem;
+                }
+            }
+            a {
+                text-decoration: underline;
+                &:hover {
+                    color: $themeClrPrimary;
+                }
+            }
+        }
+    }
 }
 
 .contact {
-  background: linear-gradient(
-      to right,
-      rgba($themeClrPrimary, 0.8),
-      rgba($themeClrPrimary, 0.8)
-    ),
-    url(../../assets/svg/common-bg.svg);
-  background-size: cover;
-  background-position: center;
+    background: linear-gradient(
+        to right,
+        rgba($themeClrPrimary, 0.7),
+        rgba($themeClrPrimary, 0.7)
+      ),
+      url(../../assets/svg/heaxgons-bg.svg);
+    background-size: cover;
+    background-position: center;
 
   &__form-container {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     background: rgba(#fff, 2);
-    padding: 4rem;
+    padding: 2rem;
     margin-top: 6rem;
     max-width: 80rem;
     text-align: right;
@@ -209,13 +228,13 @@
     }
   }
   &__form-field {
-    margin-bottom: 4rem;
+    margin-bottom: 2rem;
     @include respond(phone) {
       margin-bottom: 3rem;
     }
   }
   &__form-label {
-    color: #666;
+    color: #444;
     font-size: 1.4rem;
     letter-spacing: 1px;
     font-weight: 700;
@@ -225,7 +244,7 @@
   }
   &__form-input {
     color: #333;
-    padding: 2rem;
+    padding: 1rem;
     width: 100%;
     border: 1px solid rgb(235, 235, 235);
     font-size: 1.6rem;

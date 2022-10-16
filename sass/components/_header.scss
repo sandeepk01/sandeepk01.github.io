@@ -21,7 +21,6 @@
     cursor: pointer;
     color: #333;
     transition: color .3s;
-
     &:hover {
       color: $themeClrPrimary;
     }
@@ -31,7 +30,7 @@
     height: 5rem;
     overflow: hidden;
     margin-right: 1.5rem;
-    background: url(../../assets/png/PB-02.png);
+    background: url(../../assets/svg/sk-logo-blue.svg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
@@ -73,6 +72,7 @@
 
     &:hover {
       color: $themeClrPrimary;
+      text-decoration: underline;
     }
     @include respond(tab-port) {
       padding: 3rem 1.8rem;
