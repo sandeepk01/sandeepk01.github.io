@@ -1,8 +1,9 @@
 .home-hero {
-  color: #fff;
+  color: text-contrast($themeClrPrimary);
   background: url(../../assets/svg/sun-tornado.svg);
   background-position: center;
   background-size: cover;
+  background-color: $themeClrPrimary;
   height: 100vh;
 
   min-height: 80rem;

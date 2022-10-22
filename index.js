@@ -36,7 +36,7 @@
         const headerLogoConatiner = document.querySelector('.header__logo-container');
 
         headerLogoConatiner.addEventListener('click', () => {
-            location.href = 'index.html#home';
+            location.href = '#home';
         });
 
         const mouseScrollContainer = document.querySelector('.home-hero__mouse-scroll-cont');

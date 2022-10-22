@@ -564,6 +564,7 @@ textarea {
   background: url(../../assets/svg/sun-tornado.svg);
   background-position: center;
   background-size: cover;
+  background-color: #0c0c5c;
   height: 100vh;
   min-height: 80rem;
   max-height: 120rem;
