@@ -1,3 +1,6 @@
+@use '../abstracts/mixins' as m;
+@use '../abstracts/variables' as v;
+
 .header {
   position: fixed;
   width: 100%;
@@ -10,7 +13,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 1rem 5rem;
-    @include respond(tab-port) {
+    @include m.respond(tab-port) {
       padding: 0 2rem;
     }
   }
@@ -22,7 +25,7 @@
     color: #333;
     transition: color .3s;
     &:hover {
-      color: $themeClrPrimary;
+      color: v.$themeClrPrimary;
     }
   }
   &__logo-img-cont {
@@ -35,7 +38,7 @@
     background-repeat: no-repeat;
     background-size: contain;
 
-    @include respond(tab-port) {
+    @include m.respond(tab-port) {
       width: 4.5rem;
       height: 4.5rem;
       margin-right: 1.2rem;
@@ -56,7 +59,7 @@
   }
   &__links {
     display: flex;
-    @include respond(phone) {
+    @include m.respond(phone) {
       display: none;
     }
   }
@@ -71,10 +74,10 @@
     transition: color .3s;
 
     &:hover {
-      color: $themeClrPrimary;
+      color: v.$themeClrPrimary;
       text-decoration: underline;
     }
-    @include respond(tab-port) {
+    @include m.respond(tab-port) {
       padding: 3rem 1.8rem;
       font-size: 1.5rem;
     }
@@ -86,7 +89,7 @@
 
     padding: 2.2rem 0;
 
-    @include respond(phone) {
+    @include m.respond(phone) {
       display: block;
     }
   }
@@ -113,7 +116,7 @@
       visibility: hidden;
       opacity: 0;
 
-      @include respond(phone) {
+      @include m.respond(phone) {
         visibility: visible;
         opacity: 1;
       }
@@ -134,7 +137,7 @@
       transition: color .3s;
 
       &:hover {
-        color: $themeClrPrimary;
+        color: v.$themeClrPrimary;
       }
     }
     &:first-child {

@@ -1,16 +1,19 @@
+@use '../abstracts/mixins' as m;
+@use '../abstracts/variables' as v;
+
 .home-hero {
-  color: text-contrast($themeClrPrimary);
+  color: m.text-contrast(v.$themeClrPrimary);
   background: url(../../assets/svg/sun-tornado.svg);
   background-position: center;
   background-size: cover;
-  background-color: $themeClrPrimary;
+  background-color: v.$themeClrPrimary;
   height: 100vh;
 
   min-height: 80rem;
   max-height: 120rem;
   position: relative;
 
-  @include respond(phone) {
+  @include m.respond(phone) {
     height: unset;
     min-height: unset;
   }
@@ -20,7 +23,7 @@
     top: 50%;
     border: 2px solid #eee;
     transform: translateY(-50%);
-    @include respond(tab-port) {
+    @include m.respond(tab-port) {
       display: none;
     }
   }
@@ -31,7 +34,7 @@
     transform: translateX(-50%);
     cursor: pointer;
 
-    @include respond(phone) {
+    @include m.respond(phone) {
       display: none;
     }
   }
@@ -76,7 +79,7 @@
     max-width: 90rem;
     width: 92%;
 
-    @include respond(phone) {
+    @include m.respond(phone) {
       padding: 19rem 0 13rem 0;
       margin: auto;
       position: static;
@@ -100,7 +103,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 10rem;
-    @include respond(tab-port) {
+    @include m.respond(tab-port) {
       grid-template-columns: 1fr;
       grid-gap: 8rem;
     }
@@ -108,7 +111,7 @@
       font-weight: 700;
       font-size: 2.8rem;
       margin-bottom: 3rem;
-      @include respond(phone) {
+      @include m.respond(phone) {
         font-size: 2.4rem;
       }
     }
@@ -142,13 +145,13 @@
         grid-gap: 3rem;
         margin-bottom: 8rem;
 
-        @include respond(tab-port) {
+        @include m.respond(tab-port) {
             grid-template-columns: 1fr;
             grid-gap: 2rem;
             margin-bottom: 8rem;
         }
 
-        @include respond(tab-port) {
+        @include m.respond(tab-port) {
             text-align: center;
         }
 
@@ -163,7 +166,7 @@
             align-items: flex-start;
             background: #f5f5f5;
 
-            @include respond(tab-port) {
+            @include m.respond(tab-port) {
                 align-items: center;
             }
 
@@ -171,7 +174,7 @@
                 font-weight: 700;
                 font-size: 2.8rem;
                 margin-bottom: 1rem;
-                @include respond(phone) {
+                @include m.respond(phone) {
                     font-size: 2.4rem;
                 }
             }
@@ -179,7 +182,7 @@
                 font-weight: 600;
                 font-size: 1.8rem;
                 margin-bottom: 1rem;
-                @include respond(phone) {
+                @include m.respond(phone) {
                     font-size: 1.4rem;
                 }
             }
@@ -189,14 +192,14 @@
                 max-width: 60rem;
                 line-height: 1.7;
                 margin-bottom: 1.5rem;
-                @include respond(phone) {
+                @include m.respond(phone) {
                     font-size: 1.7rem;
                 }
             }
             a {
                 text-decoration: underline;
                 &:hover {
-                    color: $themeClrPrimary;
+                    color: v.$themeClrPrimary;
                 }
             }
         }
@@ -206,8 +209,8 @@
 .contact {
     background: linear-gradient(
         to right,
-        rgba($themeClrPrimary, 0.7),
-        rgba($themeClrPrimary, 0.7)
+        rgba(v.$themeClrPrimary, 0.7),
+        rgba(v.$themeClrPrimary, 0.7)
       ),
       url(../../assets/svg/heaxgons-bg.svg);
     background-size: cover;
@@ -221,16 +224,16 @@
     max-width: 80rem;
     text-align: right;
     width: 95%;
-    border-radius: $commonBorderRadius;
+    border-radius: v.$commonBorderRadius;
 
     margin: 5rem auto 0 auto;
-    @include respond(phone) {
+    @include m.respond(phone) {
       padding: 3rem;
     }
   }
   &__form-field {
     margin-bottom: 2rem;
-    @include respond(phone) {
+    @include m.respond(phone) {
       margin-bottom: 3rem;
     }
   }
@@ -251,7 +254,7 @@
     font-size: 1.6rem;
     letter-spacing: 0px;
     background: rgba(rgb(240, 240, 240), 1);
-    border-radius: $commonBorderRadius;
+    border-radius: v.$commonBorderRadius;
     font-weight: 600;
     /* Code for Modern Browsers */
     &::placeholder {
@@ -302,7 +305,7 @@
 
     padding: 2rem 4rem;
     font-size: 1.6rem;
-    @include respond(phone) {
+    @include m.respond(phone) {
       width: 100%;
     }
   }

@@ -1,3 +1,5 @@
+@use '../abstracts/variables' as v;
+
 .skills {
   display: flex;
   flex-wrap: wrap;
@@ -6,8 +8,8 @@
     margin-bottom: 1.5rem;
     margin-right: 1.5rem;
     font-size: 1.6rem;
-    background: $themeClrSecondaryLight;
-    border-radius: $commonBorderRadius * 5;
+    background: v.$themeClrSecondaryLight;
+    border-radius: v.$commonBorderRadius * 5;
     font-weight: 600;
     color: #222;
   }
@@ -16,8 +18,8 @@
     margin-bottom: 0.5rem;
     margin-right: 0.5rem;
     font-size: 1.2rem;
-    background: $themeClrSecondaryLight;
-    border-radius: $commonBorderRadius;
+    background: v.$themeClrSecondaryLight;
+    border-radius: v.$commonBorderRadius;
     font-weight: 600;
     color: #222;
   }

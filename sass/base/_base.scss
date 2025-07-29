@@ -1,3 +1,4 @@
+@use '../abstracts/mixins' as m;
 *,
 *::after,
 *::before {
@@ -12,17 +13,17 @@ html {
   font-size: 62.5%; //1 rem = 10px; 10px/16px = 62.5%
   scroll-behavior: smooth;
 
-  @include respond(tab-land) {
+  @include m.respond(tab-land) {
     // width < 1200?
     font-size: 59%; //1 rem =
   }
 
-  @include respond(tab-port) {
+  @include m.respond(tab-port) {
     // width < 900?
     font-size: 56%; //1 rem =
   }
 
-  @include respond(big-desktop) {
+  @include m.respond(big-desktop) {
     font-size: 65%; //1rem =
   }
 }
@@ -35,7 +36,7 @@ body {
   overflow-x: hidden;
   overflow-y: scroll;
   font-family: 'Source Sans Pro', sans-serif;
-  
+
 }
 
 a {

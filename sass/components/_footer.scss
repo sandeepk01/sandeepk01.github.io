@@ -1,18 +1,21 @@
+@use '../abstracts/mixins' as m;
+@use '../abstracts/variables' as v;
+
 .main-footer {
-  background: $themeClrPrimary;
-  color: text-contrast($themeClrPrimary);
+  background: v.$themeClrPrimary;
+  color: m.text-contrast(v.$themeClrPrimary);
   &__upper {
     display: flex;
     justify-content: space-between;
     padding: 2rem 0;
-    @include respond(tab-port) {
+    @include m.respond(tab-port) {
       padding: 1rem 0;
     }
-    @include respond(phone) {
+    @include m.respond(phone) {
       display: block;
     }
   }
-  @include respond(phone) {
+  @include m.respond(phone) {
     &__row {
         text-align: center;
     }
@@ -20,7 +23,7 @@
 
   &__row-1 {
     order: 2;
-    @include respond(tab-port) {
+    @include m.respond(tab-port) {
       margin-bottom: 5rem;
     }
   }
@@ -28,14 +31,14 @@
     width: 40%;
     order: 1;
     max-width: 50rem;
-    @include respond(tab-port) {
+    @include m.respond(tab-port) {
       width: 100%;
     }
   }
 
   &__short-desc {
     margin-top: 1rem;
-    color: text-contrast($themeClrPrimary);;
+    color: m.text-contrast(v.$themeClrPrimary);;
     font-size: 1.5rem;
     line-height: 1.7;
     a {
@@ -63,11 +66,11 @@
   &__lower {
     padding: 2rem 0;
     border-top: 2px solid #eee;
-    color: text-contrast($themeClrPrimary);;
+    color: m.text-contrast(v.$themeClrPrimary);;
     font-size: 1.5rem;
     text-align: left;
     text-align: center;
-    @include respond(tab-port) {
+    @include m.respond(tab-port) {
       padding: 3.5rem 0;
     }
   }

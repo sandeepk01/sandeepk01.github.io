@@ -15,6 +15,7 @@ Inside media queries 1em is always 16px i.e 1em = 16px at every screen size only
 */
 @use "sass:math";
 @use "sass:map";
+@use "sass:color";
 
 @mixin respond($breakpoint) {
   @if $breakpoint == phone {
@@ -44,14 +45,14 @@ Inside media queries 1em is always 16px i.e 1em = 16px at every screen size only
 }
 
 @function to-rgb($value) {
-    @return red($value), green($value), blue($value);
+    @return color.channel($value, "red", $space: rgb), color.channel($value, "green", $space: rgb), color.channel($value, "blue", $space: rgb);
 }
 
 @function text-contrast($n, $lighter: #fff, $darker: #000) {
-    $color-brightness: round((red($n) * 299) + (green($n) * 587) + math.div(blue($n) * 114, 1000));
-    $light-color: round((red(#ffffff) * 299) + (green(#ffffff) * 587) + math.div(blue(#ffffff) * 114, 1000));
+    $color-brightness: math.round((color.channel($n, "red", $space: rgb) * 299) + (color.channel($n, "green", $space: rgb) * 587) + math.div(color.channel($n, "blue", $space: rgb) * 114, 1000));
+    $light-color: math.round((color.channel(#ffffff, "red", $space: rgb) * 299) + (color.channel(#ffffff, "green", $space: rgb) * 587) + math.div(color.channel(#ffffff, "blue", $space: rgb) * 114, 1000));
 
-    @if abs($color-brightness) < math.div($light-color, 2) {
+    @if math.abs($color-brightness) < math.div($light-color, 2) {
         @return $lighter;
     } @else {
         @return $darker;
@@ -59,9 +60,9 @@ Inside media queries 1em is always 16px i.e 1em = 16px at every screen size only
 }
 
 @function colour-difference($foreground, $background) {
-    $r: (max(red($foreground), red($background))) - (min(red($foreground), red($background)));
-    $g: (max(green($foreground), green($background))) - (min(green($foreground), green($background)));
-    $b: (max(blue($foreground), blue($background))) - (min(blue($foreground), blue($background)));
+    $r: (math.max(color.channel($foreground, "red", $space: rgb), color.channel($background, "red", $space: rgb))) - (math.min(color.channel($foreground, "red", $space: rgb), color.channel($background, "red", $space: rgb)));
+    $g: (math.max(color.channel($foreground, "green", $space: rgb), color.channel($background, "green", $space: rgb))) - (math.min(color.channel($foreground, "green", $space: rgb), color.channel($background, "green", $space: rgb)));
+    $b: (math.max(color.channel($foreground, "blue", $space: rgb), color.channel($background, "blue", $space: rgb))) - (math.min(color.channel($foreground, "blue", $space: rgb), color.channel($background, "blue", $space: rgb)));
     $sum-rgb: $r + $g + $b;
 
     @if $sum-rgb < 500 {
@@ -74,7 +75,7 @@ Inside media queries 1em is always 16px i.e 1em = 16px at every screen size only
 @function contrast-ratio($background, $foreground) {
     $l1: luminance($background);
     $l2: luminance(opaque($background, $foreground));
-    @return if($l1 > $l2, divide($l1 + 0.05, $l2 + 0.05), divide($l2 + 0.05, $l1 + 0.05));
+    @return if($l1 > $l2, math.div($l1 + 0.05, $l2 + 0.05), math.div($l2 + 0.05, $l1 + 0.05));
 }
 
 // Return WCAG2.0 relative luminance
@@ -82,14 +83,14 @@ Inside media queries 1em is always 16px i.e 1em = 16px at every screen size only
 // See https://www.w3.org/TR/WCAG20-TECHS/G17.html#G17-tests
 @function luminance($color) {
     $rgb: (
-        'r': red($color),
-        'g': green($color),
-        'b': blue($color),
+        'r': color.channel($color, "red", $space: rgb),
+        'g': color.channel($color, "green", $space: rgb),
+        'b': color.channel($color, "blue", $space: rgb),
     );
 
     @each $name, $value in $rgb {
-        $value: if(divide($value, 255) < 0.03928, divide(divide($value, 255), 12.92), nth($_luminance-list, $value + 1));
-        $rgb: map-merge(
+        $value: if(math.div($value, 255) < 0.03928, math.div(math.div($value, 255), 12.92), nth($_luminance-list, $value + 1));
+        $rgb: map.merge(
             $rgb,
             (
                 $name: $value,
@@ -97,23 +98,23 @@ Inside media queries 1em is always 16px i.e 1em = 16px at every screen size only
         );
     }
 
-    @return (map-get($rgb, 'r') * 0.2126) + (map-get($rgb, 'g') * 0.7152) + (map-get($rgb, 'b') * 0.0722);
+    @return (map.get($rgb, 'r') * 0.2126) + (map.get($rgb, 'g') * 0.7152) + (map.get($rgb, 'b') * 0.0722);
 }
 
 // Return opaque color
 // opaque(#fff, rgba(0, 0, 0, .5)) => #808080
 @function opaque($background, $foreground) {
-    @return mix(rgba($foreground, 1), $background, opacity($foreground) * 100);
+    @return color.mix(color.change($foreground, $alpha: 1), $background, color.alpha($foreground) * 100%);
 }
 
 // Tint a color: mix a color with white
 @function tint-color($color, $weight) {
-    @return mix(white, $color, $weight);
+    @return color.mix(white, $color, $weight);
 }
 
 // Shade a color: mix a color with black
 @function shade-color($color, $weight) {
-    @return mix(black, $color, $weight);
+    @return color.mix(black, $color, $weight);
 }
 
 // Shade the color if the weight is positive, else tint it
